@@ -1,11 +1,6 @@
-document
-   .querySelector("button.fat")
-   .addEventListener("click", toggleFooter)
-; 
-
-function toggleFooter(){
+function toggleModal(){
    document
-      .querySelector("#footer")
+      .querySelector("#modal")
       .classList
       .toggle("hide")
    ;   
