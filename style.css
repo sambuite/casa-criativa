@@ -1,3 +1,4 @@
+/*Globais*/
 body {
    background: #e5e5e5;
    color: #252828;
@@ -23,6 +24,35 @@ p, .description {
    letter-spacing: 0.1px;
 }
 
+.button {
+   color: white;
+   background: #ff5e84;
+
+   width: 150px;
+   height: 40px;
+
+   font-size: 14px;
+   font-weight: bold;
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   border-radius: 6px;
+
+   box-shadow: 0px 8px 16px #ff5e8477;
+   transition: ease-out 100ms;
+}
+
+.button:hover {
+   border: 1px solid #ff5e84;
+   background: none;
+   color: #ff5e84;
+   text-decoration: none;
+}
+
+/*Padrões*/
+
 #container {
    width: 80%;
    max-width: 980px;
@@ -35,7 +65,7 @@ p, .description {
 #container > #intro {
    width: 300px;
 
-   margin-right: 32px;
+   margin-right: 64px;
 }
 
 #intro > main {
@@ -66,26 +96,6 @@ button {
 
 button:hover{
    text-decoration: underline;
-}
-
-button.fat {
-   color: white;
-   background: #ff5e84;
-
-   width: 150px;
-   height: 40px;
-
-   border-radius: 6px;
-
-   box-shadow: 0px 8px 16px #ff5e8477;
-   transition: ease-out 100ms;
-}
-
-button.fat:hover {
-   border: 1px solid #ff5e84;
-   background: none;
-   color: #ff5e84;
-   text-decoration: none;
 }
 
 footer {
@@ -140,10 +150,12 @@ footer a {
    background: #ff5e84;
 
    position: absolute;
+   
    top: 0;
-   bottom: 0;
    right: 0;
+   bottom: 1;
    left: 0;
+
 
    display: flex;
    justify-content: center;
@@ -157,7 +169,7 @@ footer a {
 }
 
 #modal > .content {
-   margin-top: 128px;
+   margin: 15% 0;
 
    color: #fff;
 }
@@ -256,4 +268,65 @@ form button:hover {
    background-color: #0984e3;
 
    text-decoration: none;
+}
+
+/* IDEIAS.html */
+
+#page-ideas #container {
+   display: block;
+}
+
+#page-ideas header {
+   display: flex;
+   justify-content: space-between;
+}
+
+#page-ideas nav {
+   display: flex;
+   align-items: center;
+}
+
+#page-ideas nav a {
+   margin-right: 16px;
+   color: #25282B;
+}
+
+#page-ideas nav a:last-child {
+   margin: 0;
+   color: #fff;
+}
+
+#page-ideas nav a:last-child:hover {
+   color: #ff5e84;
+}
+
+#page-ideas section#title {
+   text-align: center;
+}
+
+#page-ideas section#title p {
+   opacity: 0.7;
+   margin: 0;
+}
+
+#page-ideas section#title h1 {
+   margin: 0;
+   font-size: 28px;
+}
+
+#page-ideas section#ideas  {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   
+   gap: 20px;
+}
+
+#page-ideas section#ideas .idea {
+   margin: 0;
+}
+
+section#title,
+section#ideas,
+footer {
+   margin-top: 64px;
 }

@@ -3,5 +3,5 @@ function toggleModal(){
       .querySelector("#modal")
       .classList
       .toggle("hide")
-   ;   
+   ; 
 }
