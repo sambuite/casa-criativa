@@ -149,11 +149,12 @@ footer a {
 #modal {
    background: #ff5e84;
 
-   position: absolute;
+   position: fixed;
+   overflow-y: scroll;
    
    top: 0;
    right: 0;
-   bottom: 1;
+   bottom: 0;
    left: 0;
 
 
@@ -169,7 +170,7 @@ footer a {
 }
 
 #modal > .content {
-   margin: 15% 0;
+   margin: 5% 0;
 
    color: #fff;
 }
