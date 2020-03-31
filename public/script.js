@@ -33,7 +33,6 @@ function checkFields(event) {
 
 }
 
-
-   // for (value of valuesToCheck) {
-   //    if(event.target[value].value) return;
-   // }
+function handleDelete(id){
+   return fetch(`/ideias/${id}`, { method: 'delete' });
+}

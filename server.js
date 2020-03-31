@@ -8,38 +8,6 @@ const server = express();
 server.use(express.static("public"));
 server.use(express.urlencoded({ extended: true}));
 
-/*
-const ideas = [
-   {
-      img: "https://image.flaticon.com/icons/svg/2729/2729007.svg",
-      title: "Curso de Programação",
-      category: "Estudo",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. At commodi magnam tenetur culpa aspernatur",
-      url: "http://github.com/sambuite/",
-   },
-   {
-      img: "https://image.flaticon.com/icons/svg/2729/2729018.svg",
-      title: "Videoaula no Youtube",
-      category: "Estudo",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. At commodi magnam tenetur culpa aspernatur",
-      url: "http://github.com/sambuite/",
-   },
-   {
-      img: "https://image.flaticon.com/icons/svg/2728/2728995.svg",
-      title: "Ideias para Home Office",
-      category: "Trabalho",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. At commodi magnam tenetur culpa aspernatur",
-      url: "http://github.com/sambuite/",
-   },
-   {
-      img: "https://image.flaticon.com/icons/svg/2729/2729027.svg",
-      title: "Meditação",
-      category: "Mentalidade",
-      description: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. At commodi magnam tenetur culpa aspernatur",
-      url: "http://github.com/sambuite/",
-   },
-];
-*/
 nunjucks.configure("views", {
    express: server,
    noCache: true,
@@ -110,5 +78,22 @@ server.get('/ideias', (req, res) => {
       return res.render("ideias.html", { ideas: reversedIdeas })
    })
 });
+
+
+server.delete('/ideias/:id', async (req, res) => {
+   const {id} = await req.params;
+   console.log('id:::', id)
+
+   db.run(`DELETE FROM ideas WHERE id = ?`, [id], function(err) {
+      if (err) {
+         console.log(err);
+         return res.send("Erro no banco de dados")
+      };
+
+      console.log("Deletei", this)
+   });
+
+   return res.status(204).send();
+})
 
 server.listen(3000);
