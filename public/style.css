@@ -41,7 +41,7 @@ p, .description {
    border-radius: 6px;
 
    box-shadow: 0px 8px 16px #ff5e8477;
-   transition: ease-out 100ms;
+   transition: 300ms;
 }
 
 .button:hover {

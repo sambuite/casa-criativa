@@ -1,10 +1,14 @@
 const express = require('express');
 const nunjucks = require('nunjucks');
 
+const db = require('./db');
+
 const server = express();
 
 server.use(express.static("public"));
+server.use(express.urlencoded({ extended: true}));
 
+/*
 const ideas = [
    {
       img: "https://image.flaticon.com/icons/svg/2729/2729007.svg",
@@ -35,7 +39,7 @@ const ideas = [
       url: "http://github.com/sambuite/",
    },
 ];
-
+*/
 nunjucks.configure("views", {
    express: server,
    noCache: true,
@@ -43,23 +47,68 @@ nunjucks.configure("views", {
 
 server.get('/', (req, res) => {
 
-   const reversedIdeas = [...ideas].reverse();
+   db.all(`SELECT * FROM ideas`, function(err, rows) {
+      if (err) {
+         console.log(err);
+         return res.send("Erro no banco de dados")
+      };
 
-   let lastIdeas = [];
-   for (idea of reversedIdeas){
-      if(lastIdeas.length < 3) {
-         lastIdeas.push(idea);
+      const reversedIdeas = [...rows].reverse();
+
+      let lastIdeas = [];
+      for (idea of reversedIdeas){
+         if(lastIdeas.length < 3) {
+            lastIdeas.push(idea);
+         }
       }
-   }
 
-   return res.render("index.html", { ideas: lastIdeas })
+      return res.render("index.html", { ideas: lastIdeas })
+   });
+
+});
+server.post('/', (req,res) => {
+   const { title, category, image, description, link } = req.body; 
+
+   const query = `
+   INSERT INTO ideas(
+      image,
+      title,
+      category,
+      description,
+      link
+   ) VALUES (?,?,?,?,?);`;
+
+   const values = [
+      image,
+      title,
+      category,
+      description,
+      link
+   ]
+
+   db.run(query, values, function(err) {
+      if (err) {
+         console.log(err);
+         return res.send("Erro no banco de dados")
+      };
+
+      return res.redirect('/ideias');
+   });
+   
 });
 
 server.get('/ideias', (req, res) => {
 
-   const reversedIdeas = [...ideas].reverse();
+   db.all(`SELECT * FROM ideas`, function(err, rows) {
+      if (err) {
+         console.log(err);
+         return res.send("Erro no banco de dados")
+      };
 
-   return res.render("ideias.html", { ideas: reversedIdeas })
+      const reversedIdeas = [...rows].reverse();
+
+      return res.render("ideias.html", { ideas: reversedIdeas })
+   })
 });
 
 server.listen(3000);
